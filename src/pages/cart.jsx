@@ -222,7 +222,7 @@ const Cart = () => {
                                         Have a Promo Code?
                                     </span>
                                 </div>
-                                <div className="flex gap-2">
+                                <div className="flex flex-wrap gap-2">
                                     <input
                                         type="text"
                                         placeholder="Enter code"
