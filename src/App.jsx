@@ -8,26 +8,32 @@ import 'react-toastify/dist/ReactToastify.css';
 import Cart from './pages/cart'
 import CheckOut from './pages/CheckOut'
 import FilteredData from './pages/FilteredData'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { SkeletonTheme } from 'react-loading-skeleton'
+
 
 
 
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <ToastContainer />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<CheckOut />} />
-        <Route path="/filteredproducts" element={<FilteredData />} />
+    <SkeletonTheme baseColor="var(--skeleton-base)"
+      highlightColor="var(--skeleton-highlight)">
+      <BrowserRouter>
+        <ToastContainer />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckOut />} />
+          <Route path="/filteredproducts" element={<FilteredData />} />
 
 
-      </Routes>
-      <Footer />
+        </Routes>
+        <Footer />
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </SkeletonTheme>
 
   )
 }

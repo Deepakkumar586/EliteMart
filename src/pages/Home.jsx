@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowRight, FaShoppingBag, FaFire, FaShoppingCart, FaHeart, FaEye, FaChevronRight, FaStar, FaStore } from 'react-icons/fa';
-import { Categories } from '../assets/mockData';
+// import { Categories } from '../assets/mockData';
 import HeroImage from '../assets/images/8852975.jpg';
 import InfoSection from '../components/infoSection';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,9 @@ const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const [loading, setLoading] = useState(true);
+  const [selectesCategory, setSelectedCategory] = useState('All');
+
+
 
 
   useEffect(() => {
@@ -34,6 +37,18 @@ const Home = () => {
     fetchProducts();
 
   }, [dispatch])
+
+
+  const Categories = [
+    "All",
+    "electronics",
+    "jewelery",
+    "men's clothing",
+    "women's clothing"
+  ];
+
+  const filtercategoryData = selectesCategory === 'All' ? products : products.filter((item) => item.category === selectesCategory);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white ">
       <main className="container mx-auto px-4 py-8 ">
@@ -51,24 +66,56 @@ const Home = () => {
               </div>
 
               <ul className="space-y-3">
-                {Categories.map((cat, index) => (
-                  <li
-                    key={index}
-                    className="group cursor-pointer transition-all duration-300"
-                  >
-                    <div className="flex items-center justify-between p-2 rounded-xl bg-white  dark:bg-gray-800 dark:hover:bg-gray-700 border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-gray-600 transition-all duration-300">
-                      <div className="flex items-center gap-4">
-                        <div className="relative">
-                          <div className="w-3 h-3 rounded-full bg-red-500 dark:bg-gray-400 group-hover:scale-125 transition-transform duration-300"></div>
+                {Categories.map((cat, index) => {
+                  const isActive = selectesCategory === cat;
+
+                  return (
+                    <li
+                      key={index}
+                      className="cursor-pointer transition-all duration-300"
+                      onClick={() => setSelectedCategory(cat)}
+                    >
+                      <div
+                        className={`
+          flex items-center justify-between p-2 rounded-xl
+          border transition-all duration-300
+          bg-white dark:bg-gray-800
+          dark:hover:bg-gray-700 hover:border-red-200 dark:hover:border-gray-600
+          ${isActive ? "border-red-500 shadow-md" : "border-gray-100 dark:border-gray-700"}
+        `}
+                      >
+                        <div className="flex items-center gap-4">
+
+                          <div
+                            className={`
+              w-3 h-3 rounded-full transition-all duration-300
+              ${isActive ? "bg-red-600 scale-125" : "bg-red-400 dark:bg-gray-500"}
+            `}
+                          ></div>
+
+
+                          <span
+                            className={`
+              text-md font-medium transition-colors duration-300
+              ${isActive ? "text-red-600 dark:text-red-400" : "text-gray-800 dark:text-gray-200"}
+            `}
+                          >
+                            {cat}
+                          </span>
                         </div>
-                        <span className="text-md font-medium group-hover:text-red-600 dark:group-hover:text-gray-200 transition-colors duration-300">
-                          {cat}
-                        </span>
+
+
+                        <FaArrowRight
+                          className={`
+            transition-all duration-300 text-red-500 dark:text-gray-300
+            ${isActive ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"}
+          `}
+                        />
                       </div>
-                      <FaArrowRight className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-red-500 dark:text-gray-400" />
-                    </div>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
+
               </ul>
 
 
@@ -150,7 +197,7 @@ const Home = () => {
 
           {/* Flex container for responsive layout */}
 
-          <ProductCard products={products} loading={loading} />
+          <ProductCard products={filtercategoryData} loading={loading} />
 
         </div>
 
