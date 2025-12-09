@@ -204,14 +204,14 @@ const Cart = () => {
                                 </div>
                             </div>
 
-                            <div className="space-y-4">
-                                <button className="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3">
+                            <div className="flex flex-col space-y-4">
+                                <Link to="/checkout"> <button className="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3">
                                     <FaCreditCard size={20} />
                                     Proceed to Checkout
-                                </button>
-                                <button className="w-full py-3 border-2 border-red-600 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 font-semibold rounded-xl transition-colors duration-300">
+                                </button></Link>
+                                <Link to="/" className='mt-4'> <button className="w-full py-3 border-2 border-red-600 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 font-semibold rounded-xl transition-colors duration-300">
                                     Continue Shopping
-                                </button>
+                                </button></Link>
                             </div>
 
 

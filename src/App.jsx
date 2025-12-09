@@ -6,6 +6,10 @@ import Home from './pages/Home'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cart from './pages/cart'
+import CheckOut from './pages/CheckOut'
+import FilteredData from './pages/FilteredData'
+
+
 
 
 const App = () => {
@@ -16,6 +20,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/filteredproducts" element={<FilteredData />} />
+
 
       </Routes>
       <Footer />

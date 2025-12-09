@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react'
+import { use } from 'react';
 import { FaMoon, FaSearch, FaShoppingCart, FaSun, FaUser } from 'react-icons/fa'
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
+import { setSearchValue } from '../redux/productSlice';
 
 const Navbar = () => {
 
   const [theme, setTheme] = useState('light');
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearchform = (e) => {
+    e.preventDefault();
+    dispatch(setSearchValue(search));
+    navigate('/filteredproducts');
+
+  }
 
   const carts = useSelector((state) => state.cart.carts)
 
@@ -38,19 +50,23 @@ const Navbar = () => {
         </div>
 
         <div className='relative flex-1 mx-4'>
-          <form>
-            <input type='text' placeholder='Search products...' className='w-full rounded-lg border py-2 px-4 ' />
-            <FaSearch className='absolute top-3 right-3 text-red-600' />
+          <form onSubmit={handleSearchform}>
+            <input type='text' placeholder='Search products...'
+              onChange={(e) => setSearch(e.target.value)}
+              className='w-full rounded-lg border py-2 px-4 ' />
+            <button type="submit" className='absolute top-3 right-3 text-red-600'>
+              <FaSearch />
+            </button>
           </form>
         </div>
 
         <div className='flex items-center space-x-4'>
           <Link to="/cart">
             <div className="relative">
-              {/* Cart Icon */}
+
               <FaShoppingCart className="text-xl text-gray-950 dark:text-white" />
 
-              {/* Badge */}
+
               {carts.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {carts.length}
@@ -67,13 +83,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className='flex items-center justify-center space-x-10 py-4 text-sm font-medium'>
-        <Link to='/' className='hover:underline text-gray-900 dark:text-white text-[15px]'>Home</Link>
-        <Link to='/products' className='hover:underline text-gray-900 dark:text-white text-[15px]'>Products</Link>
-        <Link to='/categories' className='hover:underlinetext-gray-900 dark:text-white text-[15px]'>Shop</Link>
-        <Link to='/about' className='hover:underline text-gray-900 dark:text-white text-[15px]'>About</Link>
-        <Link to='/contact' className='hover:underline text-gray-900 dark:text-white text-[15px]'>Contact</Link>
-      </div>
+
     </nav>
   )
 }
