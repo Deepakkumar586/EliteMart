@@ -120,7 +120,7 @@ const InfoSection = () => {
                             <div className="grid grid-cols-2 gap-6">
                                 {/* Shipping Stats */}
                                 <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl border border-red-100 dark:border-gray-700 shadow-lg">
-                                    <div className="flex items-center justify-between mb-4">
+                                    <div className="flex flex-wrap gap-2 items-center justify-between mb-4">
                                         <div className="text-4xl font-bold text-red-600 dark:text-red-400">
                                             24/7
                                         </div>
@@ -138,7 +138,7 @@ const InfoSection = () => {
 
 
                                 <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl border border-red-100 dark:border-gray-700 shadow-lg">
-                                    <div className="flex items-center justify-between mb-4">
+                                    <div className="flex flex-wrap gap-2 items-center justify-between mb-4">
                                         <div className="text-4xl font-bold text-red-600 dark:text-red-400">
                                             30%
                                         </div>
@@ -156,7 +156,7 @@ const InfoSection = () => {
 
 
                                 <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl border border-red-100 dark:border-gray-700 shadow-lg">
-                                    <div className="flex items-center justify-between mb-4">
+                                    <div className="flex flex-wrap gap-2 items-center justify-between mb-4">
                                         <div className="text-4xl font-bold text-red-600 dark:text-red-400">
                                             100%
                                         </div>
@@ -174,7 +174,7 @@ const InfoSection = () => {
 
 
                                 <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl border border-red-100 dark:border-gray-700 shadow-lg">
-                                    <div className="flex items-center justify-between mb-4">
+                                    <div className="flex flex-wrap gap-2 items-center justify-between mb-4">
                                         <div className="text-4xl font-bold text-red-600 dark:text-red-400">
                                             98%
                                         </div>
@@ -193,7 +193,7 @@ const InfoSection = () => {
 
 
                             <div className="mt-8 p-6 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-700 dark:to-rose-800 rounded-2xl text-white">
-                                <div className="flex items-center justify-between mb-4">
+                                <div className="flex flex-wrap gap-2 items-center justify-between mb-4">
                                     <h4 className="text-xl font-bold">Secure Payment Options</h4>
                                     <div className="flex items-center gap-2">
                                         <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
