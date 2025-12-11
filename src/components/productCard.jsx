@@ -5,10 +5,12 @@ import { addToCart } from "../redux/cartSlice";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
+import { addToWhishlist, removeWhishlist } from "../redux/whishlistSlice";
 
 const ProductCard = ({ products, loading }) => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.carts);
+    const whishlists = useSelector((state) => state.whishlist.whishlists);
 
 
 
@@ -20,10 +22,26 @@ const ProductCard = ({ products, loading }) => {
         toast.success("Product added to cart!");
     };
 
+    const handlewhishlist = (e, product) => {
+        e.preventDefault();
+        dispatch(addToWhishlist(product));
+        toast.success("Product added to whishlist!");
+    }
+    const handleremoveWhishlist = (id) => {
+
+        dispatch(removeWhishlist(id));
+        toast.success("Product removed from whishlist!");
+    }
+
+
+
+
 
     const CardLayout = ({ product, isSkeleton }) => {
         const isAdded =
             cart.find((item) => item.id === product?.id);
+        const isInwhishlist =
+            whishlists?.some((item) => item.id === product?.id);
 
         return (
             <div
@@ -51,11 +69,26 @@ const ProductCard = ({ products, loading }) => {
                     )}
 
 
-                    {!isSkeleton && (
-                        <button className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full">
-                            <FaHeart className="text-red-600" size={16} />
-                        </button>
-                    )}
+                    {!isSkeleton &&
+                        (isInwhishlist ? (
+                            <button
+                                className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full"
+                                onClick={() => handleremoveWhishlist(product.id)}
+                            >
+                                <FaHeart className="text-red-600" size={16} />
+                            </button>
+                        ) : (
+                            <button
+                                className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full"
+                                onClick={(e) => handlewhishlist(e, product)}   // this one still uses event — OK
+                            >
+                                <FaHeart className="text-white" size={16} />
+                            </button>
+                        ))
+                    }
+
+
+
 
 
                     {!isSkeleton && (

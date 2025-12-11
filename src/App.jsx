@@ -10,6 +10,7 @@ import CheckOut from './pages/CheckOut'
 import FilteredData from './pages/FilteredData'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { SkeletonTheme } from 'react-loading-skeleton'
+import Whishlist from './pages/whishlist'
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<CheckOut />} />
           <Route path="/filteredproducts" element={<FilteredData />} />
+          <Route path="/whishlist" element={<Whishlist />} />
 
 
         </Routes>

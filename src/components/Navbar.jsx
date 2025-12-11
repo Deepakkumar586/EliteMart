@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { use } from 'react';
-import { FaMoon, FaSearch, FaShoppingCart, FaSun, FaUser } from 'react-icons/fa'
+import { FaHeart, FaMoon, FaSearch, FaShoppingCart, FaSun, FaUser } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
 import { setSearchValue } from '../redux/productSlice';
@@ -20,6 +20,7 @@ const Navbar = () => {
   }
 
   const carts = useSelector((state) => state.cart.carts)
+  const whishlists = useSelector((state) => state.whishlist.whishlists);
 
 
 
@@ -68,8 +69,23 @@ const Navbar = () => {
 
 
               {carts.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-3 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
                   {carts.length}
+                </span>
+              )}
+            </div>
+          </Link>
+
+
+          <Link to="/whishlist">
+            <div className="relative">
+
+              <FaHeart className="text-xl text-gray-950 dark:text-white" />
+
+
+              {whishlists.length > 0 && (
+                <span className="absolute -top-3 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                  {whishlists.length}
                 </span>
               )}
             </div>
