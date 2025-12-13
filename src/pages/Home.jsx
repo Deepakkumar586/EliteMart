@@ -55,7 +55,7 @@ const Home = () => {
         <div className="grid lg:grid-cols-3 gap-8">
 
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-2xl">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-2xl">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-red-100 dark:bg-gray-700 rounded-lg">
                   <FaShoppingBag className="text-red-600 dark:text-gray-300" />
@@ -140,7 +140,7 @@ const Home = () => {
               <img
                 src={HeroImage}
                 alt="Hero"
-                className="w-full h-[500px] object-cover opacity-30 dark:opacity-20"
+                className="w-full  object-cover opacity-30 dark:opacity-20"
               />
 
               <div className="absolute inset-0 z-20 p-8 flex flex-col justify-center">

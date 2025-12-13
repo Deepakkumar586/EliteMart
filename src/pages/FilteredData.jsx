@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../redux/cartSlice';
 import { toast } from 'react-toastify';
+import { addToWhishlist, removeWhishlist } from '../redux/whishlistSlice';
 
 const FilteredData = () => {
     const filteredData = useSelector((state) => state.product.filterData);
     const cart = useSelector((state) => state.cart.carts);
+    const whishlists = useSelector((state) => state.whishlist.whishlists);
 
     const dispatch = useDispatch();
 
@@ -20,6 +22,18 @@ const FilteredData = () => {
 
     }
 
+    const handlewhishlist = (e, product) => {
+        e.preventDefault();
+        dispatch(addToWhishlist(product));
+        toast.success("Product added to whishlist!");
+    }
+    const handleremoveWhishlist = (id) => {
+
+        dispatch(removeWhishlist(id));
+        toast.success("Product removed from whishlist!");
+    }
+
+
     return (
         <div className='min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white p-8'>
             {filteredData.length === 0 ? (
@@ -30,6 +44,8 @@ const FilteredData = () => {
                 <div className="flex flex-wrap -m-2">
                     {filteredData.map((product) => {
                         const isAdded = cart.find((item) => item.id === product.id);
+                        const isInwhishlist =
+                            whishlists?.some((item) => item.id === product?.id);
                         return (
                             <div
                                 key={product.id}
@@ -43,9 +59,22 @@ const FilteredData = () => {
                                             alt={product.title}
                                             className="w-full h-40 object-contain p-3"
                                         />
-                                        <button className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">
-                                            <FaHeart className="text-red-600 dark:text-red-400" size={16} />
-                                        </button>
+
+
+                                        {
+                                            isInwhishlist ? (
+                                                <button
+                                                    className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full"
+                                                    onClick={() => handleremoveWhishlist(product.id)}
+                                                >
+                                                    <FaHeart className="text-red-600" size={16} />
+                                                </button>
+                                            ) : (
+                                                <button className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors" onClick={(e) => handlewhishlist(e, product)}>
+                                                    <FaHeart className="text-gray-800 dark:text-white" size={16} />
+                                                </button>
+                                            )
+                                        }
                                         <span className="absolute bottom-2 left-2 px-2 py-1 bg-red-600 text-white text-xs font-semibold rounded-full">
                                             {product.category}
                                         </span>

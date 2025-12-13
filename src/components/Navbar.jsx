@@ -93,7 +93,7 @@ const Navbar = () => {
           <button onClick={toggleTheme} className='text-gray-950 dark:text-white bg-gray-200 dark:bg-gray-600 p-2 rounded-full'>
             {theme === 'light' ? <FaMoon /> : <FaSun />}
           </button>
-          <button className='hidden md:block text-gray-950 dark:text-white tracking-[1px]'>Login | Register</button>
+          <Link to="/login">  <button className='hidden md:block text-gray-950 dark:text-white tracking-[1px]'>Login | Register</button></Link>
           <button className='block md:hidden text-gray-950 dark:text-white'><FaUser /></button>
 
         </div>

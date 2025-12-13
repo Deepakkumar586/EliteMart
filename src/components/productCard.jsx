@@ -82,7 +82,7 @@ const ProductCard = ({ products, loading }) => {
                                 className="absolute top-2 right-2 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full"
                                 onClick={(e) => handlewhishlist(e, product)}   // this one still uses event — OK
                             >
-                                <FaHeart className="text-white" size={16} />
+                                <FaHeart className="text-gray-800 white dark:text-white" size={16} />
                             </button>
                         ))
                     }
