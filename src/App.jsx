@@ -16,29 +16,74 @@ import { toast } from 'react-toastify';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from './firebase/firebase'
 import { getDatabase } from 'firebase/database'
+import { ref, get } from "firebase/database";
+
 
 
 // create instance
 const auth = getAuth(app);
 const db = getDatabase(app);
 
+const AppLoader = () => (
+  <div className="min-h-screen bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center gap-4">
+
+
+    <div className="w-10 h-10 border-4 border-gray-300 dark:border-gray-600 
+                    border-t-red-600 dark:border-t-red-400 
+                    rounded-full animate-spin" />
+
+
+    <p className="text-lg font-medium text-gray-800 dark:text-gray-300 
+                  animate-pulse">
+      Loading EliteMart...
+    </p>
+
+  </div>
+);
+
+
+
+
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [authLoading, setAuthLoading] = useState(true);
+
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        setIsLoggedIn(true);
-        toast.success("You are Logged In!")
-      }
-      else {
-        toast.error("You are not  Logged In!")
+        try {
+
+          const snapshot = await get(ref(db, `users/${currentUser.uid}`));
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            setIsLoggedIn(true);
+            toast.success(`Welcome back, ${userData.name}! `);
+          } else {
+
+            toast.success("You are logged in!");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          toast.error("Logged in, but failed to fetch user info.");
+        }
+
+        setAuthLoading(false);
+      } else {
+        setIsLoggedIn(false);
+        toast.error("You are not logged in!");
+        setAuthLoading(false);
       }
     });
 
     return () => unsubscribe();
   }, []);
+
+
+  if (authLoading) {
+    return <AppLoader />;
+  }
 
   return (
     <SkeletonTheme baseColor="var(--skeleton-base)"

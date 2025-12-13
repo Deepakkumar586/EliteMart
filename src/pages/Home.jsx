@@ -52,10 +52,10 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white ">
       <main className="container mx-auto px-4 py-8 ">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-8 lg:auto-rows-fr">
 
-          <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-2xl">
+          <div className="lg:col-span-1 flex">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-2xl flex flex-col w-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-red-100 dark:bg-gray-700 rounded-lg">
                   <FaShoppingBag className="text-red-600 dark:text-gray-300" />
@@ -132,15 +132,15 @@ const Home = () => {
           </div>
 
 
-          <div className="lg:col-span-2">
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-red-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl dark:shadow-2xl">
+          <div className="lg:col-span-2 flex">
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-red-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 border  border-gray-200 dark:border-gray-700 shadow-xl dark:shadow-2x w-full min-h-[420px] lg:min-h-fulll">
 
               <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/50 to-transparent dark:bg-gradient-to-r dark:from-gray-900/90 dark:via-gray-900/70 dark:to-transparent z-10"></div>
 
               <img
                 src={HeroImage}
                 alt="Hero"
-                className="w-full  object-cover opacity-30 dark:opacity-20"
+                className="w-full h-full object-cover opacity-30 dark:opacity-20"
               />
 
               <div className="absolute inset-0 z-20 p-8 flex flex-col justify-center">

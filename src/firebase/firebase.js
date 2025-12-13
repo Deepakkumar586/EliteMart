@@ -1,13 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBUiq_DpSo1ri5yNqlirZluIZWz3oRiS58",
-    authDomain: "elitemart-c7826.firebaseapp.com",
-    projectId: "elitemart-c7826",
-    storageBucket: "elitemart-c7826.firebasestorage.app",
-    messagingSenderId: "656968759126",
-    appId: "1:656968759126:web:5e28dc1d3ebd3feba8c8f7",
-    databaseURL: "https://elitemart-c7826-default-rtdb.firebaseio.com"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 
 };
 
