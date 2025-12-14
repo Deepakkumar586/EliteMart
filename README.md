@@ -1,11 +1,11 @@
-# Projextlern — Vite + React + Tailwind starter
+# EliteMart — Vite + React + Tailwind starter
 
 This project is a minimal Vite + React setup with Tailwind CSS and a dark/light theme toggle (class-based dark mode).
 
 ## Setup (PowerShell)
 
 ```powershell
-cd "c:\Users\Deepak kumar\Desktop\projextlern"
+
 npm install
 npm run dev
 ```
@@ -14,6 +14,7 @@ npm run dev
 - The theme toggle in the header switches between light and dark; the setting is saved to `localStorage`.
 
 ## Notes
+
 - Tailwind is configured with `darkMode: 'class'` — we toggle the `dark` class on the `document.documentElement`.
 - If you want to use a different package manager, run the equivalent `pnpm`/`yarn` commands.
 
