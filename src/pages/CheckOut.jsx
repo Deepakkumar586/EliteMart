@@ -7,57 +7,44 @@ import axios from "axios";
 
 
 const CheckOut = () => {
+    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY;
+
+
     const carts = useSelector((state) => state.cart.carts)
     const totalAmount = useSelector((state) => state.cart.totalAmount)
     const totalQuantity = useSelector((state) => state.cart.totalQuantity)
     const navigate = useNavigate();
-    const loadRazorpayScript = () => {
-        return new Promise((resolve) => {
-            const script = document.createElement("script");
-            script.src = "https://checkout.razorpay.com/v1/checkout.js";
-            script.onload = () => resolve(true);
-            script.onerror = () => resolve(false);
-            document.body.appendChild(script);
-        });
-    };
+
 
 
     // payment 
     const handlePayment = async () => {
-        const res = await loadRazorpayScript();
-        if (!res) {
-            alert("Razorpay SDK failed to load");
-            return;
-        }
+
         if (!validateForm()) {
             return;
         }
         try {
 
             const { data } = await axios.post("http://localhost:5000/api/payment/create-order", {
-                amount: Number(total), // amount from frontend
+                amount: Number(total),
             });
 
-            // 2️⃣ Razorpay options
+
             const options = {
-                key: "rzp_test_BO3QvAOBJnCgbu", // your public key
+                key: razorpayKey,
                 amount: data.amount,
                 currency: "INR",
                 name: "EliteMart",
                 description: "Order Payment",
                 order_id: data.id,
                 handler: async function (response) {
-                    // 3️⃣ Verify payment
+
                     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
                     await axios.post("http://localhost:5000/api/payment/verify-payment", {
                         razorpay_payment_id,
                         razorpay_order_id,
                         razorpay_signature,
                     });
-
-
-                    // 4️⃣ Redirect after success
-                    console.log("Payment Success", response);
 
                     navigate("/");
                 },
