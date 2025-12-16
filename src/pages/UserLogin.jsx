@@ -126,15 +126,6 @@ const UserLogin = () => {
         }
     };
 
-
-
-
-
-
-
-
-
-
     return (
         <div className=' flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4'>
             <div className='bg-white dark:bg-gray-800 w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300'>
