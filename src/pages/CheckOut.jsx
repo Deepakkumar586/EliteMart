@@ -1,13 +1,84 @@
 import React, { useState } from "react";
 import { FaCreditCard, FaTag, FaTruck, FaLock, FaUser, FaMapMarkerAlt, FaPhone, FaEnvelope, FaPaypal, FaMoneyBillAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import axios from "axios";
+
 
 const CheckOut = () => {
     const carts = useSelector((state) => state.cart.carts)
     const totalAmount = useSelector((state) => state.cart.totalAmount)
     const totalQuantity = useSelector((state) => state.cart.totalQuantity)
+    const navigate = useNavigate();
+    const loadRazorpayScript = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
+
+    // payment 
+    const handlePayment = async () => {
+        const res = await loadRazorpayScript();
+        if (!res) {
+            alert("Razorpay SDK failed to load");
+            return;
+        }
+        if (!validateForm()) {
+            return;
+        }
+        try {
+
+            const { data } = await axios.post("http://localhost:5000/api/payment/create-order", {
+                amount: Number(total), // amount from frontend
+            });
+
+            // 2️⃣ Razorpay options
+            const options = {
+                key: "rzp_test_BO3QvAOBJnCgbu", // your public key
+                amount: data.amount,
+                currency: "INR",
+                name: "EliteMart",
+                description: "Order Payment",
+                order_id: data.id,
+                handler: async function (response) {
+                    // 3️⃣ Verify payment
+                    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
+                    await axios.post("http://localhost:5000/api/payment/verify-payment", {
+                        razorpay_payment_id,
+                        razorpay_order_id,
+                        razorpay_signature,
+                    });
+
+
+                    // 4️⃣ Redirect after success
+                    console.log("Payment Success", response);
+
+                    navigate("/");
+                },
+                prefill: {
+                    name: "Deepak Kumar",
+                    email: "deepak@gmail.com",
+                    contact: "9999999999",
+                },
+                theme: {
+                    color: "#0d6efd",
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        } catch (error) {
+            console.error(error);
+            alert("Payment failed. Try again!");
+        }
+    };
+
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -382,6 +453,7 @@ const CheckOut = () => {
 
                                 <button
                                     type="submit"
+                                    onClick={handlePayment}
                                     disabled={isSubmitting}
                                     className={`w-full mt-6 py-4 px-6 rounded-xl font-bold text-white transition-all ${isSubmitting
                                         ? 'bg-gray-400 cursor-not-allowed'
@@ -393,7 +465,9 @@ const CheckOut = () => {
                                             Processing...
                                         </div>
                                     ) : (
-                                        <div className="flex items-center justify-center gap-3">
+                                        <div className="flex items-center justify-center gap-3"
+
+                                        >
                                             <FaLock />
                                             Pay Securely ${total}
                                         </div>
