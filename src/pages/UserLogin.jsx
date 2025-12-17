@@ -51,14 +51,14 @@ const UserLogin = () => {
                         email: '',
                         password: '',
                     });
-                    console.log("User data:", snapshot.val());
+                    // console.log("User data:", snapshot.val());
 
                 }
                 setIsSubmitting(false);
             }
             catch (error) {
                 toast.error(error.message);
-                console.log(error)
+                // console.log(error)
                 setIsSubmitting(false);
             }
 
@@ -93,7 +93,7 @@ const UserLogin = () => {
             }
             catch (error) {
                 toast.error(error.message);
-                console.log(error)
+                // console.log(error)
             }
             setIsSubmitting(false)
 

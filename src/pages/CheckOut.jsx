@@ -17,62 +17,11 @@ const CheckOut = () => {
 
 
 
-    // payment 
+
     const handlePayment = async () => {
 
-        if (!validateForm()) {
-            return;
-        }
-        try {
-
-            const { data } = await axios.post("http://localhost:5000/api/payment/create-order", {
-                amount: Number(total),
-            });
 
 
-            const options = {
-                key: razorpayKey,
-                amount: data.amount,
-                currency: "INR",
-                name: "EliteMart",
-                description: "Order Payment",
-                order_id: data.id,
-                handler: async function (response) {
-
-                    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
-                    await axios.post("http://localhost:5000/api/payment/verify-payment", {
-                        razorpay_payment_id,
-                        razorpay_order_id,
-                        razorpay_signature,
-                    });
-
-                    navigate("/success", {
-                        state: {
-                            carts,
-                            total,
-                            discount,
-                            totalAmount,
-                            paymentId: response.razorpay_payment_id,
-                            orderId: response.razorpay_order_id,
-                        },
-                    });
-                },
-                prefill: {
-                    name: "Deepak Kumar",
-                    email: "deepak@gmail.com",
-                    contact: "9999999999",
-                },
-                theme: {
-                    color: "#0d6efd",
-                },
-            };
-
-            const rzp = new window.Razorpay(options);
-            rzp.open();
-        } catch (error) {
-            console.error(error);
-            alert("Payment failed. Try again!");
-        }
     };
 
 
@@ -139,7 +88,7 @@ const CheckOut = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateForm()) {
@@ -148,24 +97,71 @@ const CheckOut = () => {
 
         setIsSubmitting(true);
 
-        setTimeout(() => {
-            console.log("Order submitted:", formData);
-            toast.success("Order placed successfully!");
-            setIsSubmitting(false);
+        try {
 
-            setFormData({
-                firstName: "",
-                lastName: "",
-                address: "",
-                city: "",
-                postalCode: "",
-                email: "",
-                phone: "",
-                country: "",
-                state: "",
-                paymentMethod: "card"
+            const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/payment/create-order`, {
+                amount: Number(total),
             });
-        }, 1000);
+
+
+            const options = {
+                key: razorpayKey,
+                amount: data.amount,
+                currency: "INR",
+                name: "EliteMart",
+                description: "Order Payment",
+                order_id: data.id,
+                handler: async function (response) {
+
+                    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
+                    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/payment/verify-payment`, {
+                        razorpay_payment_id,
+                        razorpay_order_id,
+                        razorpay_signature,
+                    });
+
+                    navigate("/success", {
+                        state: {
+                            carts,
+                            total,
+                            discount,
+                            totalAmount,
+                            paymentId: response.razorpay_payment_id,
+                            orderId: response.razorpay_order_id,
+                        },
+                    });
+                    toast.success("Order placed successfully!");
+                    setIsSubmitting(false);
+
+                    setFormData({
+                        firstName: "",
+                        lastName: "",
+                        address: "",
+                        city: "",
+                        postalCode: "",
+                        email: "",
+                        phone: "",
+                        country: "",
+                        state: "",
+                        paymentMethod: "card"
+                    });
+                },
+                prefill: {
+                    name: "Deepak Kumar",
+                    email: "deepak@gmail.com",
+                    contact: "9999999999",
+                },
+                theme: {
+                    color: "#0d6efd",
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        } catch (error) {
+            toast.error("Payment failed. Try again!")
+
+        }
     };
 
     const shipping = 0;
@@ -449,7 +445,7 @@ const CheckOut = () => {
 
                                 <button
                                     type="submit"
-                                    onClick={handlePayment}
+
                                     disabled={isSubmitting}
                                     className={`w-full mt-6 py-4 px-6 rounded-xl font-bold text-white transition-all ${isSubmitting
                                         ? 'bg-gray-400 cursor-not-allowed'

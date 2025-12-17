@@ -83,7 +83,7 @@ const PaymentSuccess = () => {
                                     >
                                         <div className="relative">
                                             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 flex items-center justify-center group-hover:scale-105 transition-transform">
-                                                <span className="font-bold text-red-600 dark:text-red-400 text-lg">
+                                                <span className="font-bold text-red-600 dark:text-red-400 text-sm">
                                                     ₹{item.price}
                                                 </span>
                                             </div>
