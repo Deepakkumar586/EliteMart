@@ -34,7 +34,7 @@ const Wishlist = () => {
                 <div className="mb-6 sm:mb-8 lg:mb-10">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 sm:mb-6">
                         <div className="flex items-center gap-3">
-                            <div className="p-2 sm:p-3 bg-gradient-to-r from-red-500 to-pink-600 rounded-lg sm:rounded-xl">
+                            <div className="p-2 sm:p-3 bg-gradient-to-r from-red-600 to-red-700 rounded-lg sm:rounded-xl">
                                 <FaHeart className="text-xl sm:text-2xl text-white" />
                             </div>
                             <div>
@@ -55,7 +55,7 @@ const Wishlist = () => {
 
                 {whishlists.length === 0 ? (
                     <div className="text-center py-12 sm:py-16 lg:py-20 px-4">
-                        <div className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/10 dark:to-pink-900/10 rounded-full mb-4 sm:mb-6">
+                        <div className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-red-50 to-red-50 dark:from-red-900/10 dark:to-red-900/10 rounded-full mb-4 sm:mb-6">
                             <FaHeart className="text-4xl sm:text-5xl text-red-400 dark:text-red-300" />
                         </div>
                         <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
@@ -66,7 +66,7 @@ const Wishlist = () => {
                         </p>
                         <Link
                             to="/"
-                            className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base"
+                            className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-700 text-white font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-sm sm:text-base"
                         >
                             <FaShoppingCart className="text-sm sm:text-base" />
                             <span>Start Shopping</span>
@@ -158,7 +158,7 @@ const Wishlist = () => {
                                                 ) : (
                                                     <button
                                                         onClick={(e) => handleAddToCart(e, item)}
-                                                        className="flex items-center justify-center gap-2 w-full px-3 py-2 sm:py-2.5 text-xs sm:text-sm bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
+                                                        className="flex items-center justify-center gap-2 w-full px-3 py-2 sm:py-2.5 text-xs sm:text-sm bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md"
                                                     >
                                                         <FaShoppingCart className="text-xs sm:text-sm" />
                                                         <span>Add to Cart</span>

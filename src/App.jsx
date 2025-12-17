@@ -17,6 +17,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from './firebase/firebase'
 import { getDatabase, set } from 'firebase/database'
 import { ref, get } from "firebase/database";
+import PaymentSuccess from './pages/PaymentSuccess'
 
 
 
@@ -108,6 +109,11 @@ const App = () => {
           <Route path="/checkout" element={isLoggedIn ? <CheckOut /> : <Navigate to="/login" />} />
           <Route path="/filteredproducts" element={isLoggedIn ? <FilteredData /> : <Navigate to="/login" />} />
           <Route path="/whishlist" element={isLoggedIn ? <Whishlist /> : <Navigate to="/login" />} />
+          <Route
+            path="/success"
+            element={isLoggedIn ? <PaymentSuccess /> : <Navigate to="/login" />}
+          />
+
 
 
 

@@ -46,7 +46,16 @@ const CheckOut = () => {
                         razorpay_signature,
                     });
 
-                    navigate("/");
+                    navigate("/success", {
+                        state: {
+                            carts,
+                            total,
+                            discount,
+                            totalAmount,
+                            paymentId: response.razorpay_payment_id,
+                            orderId: response.razorpay_order_id,
+                        },
+                    });
                 },
                 prefill: {
                     name: "Deepak Kumar",
@@ -377,7 +386,7 @@ const CheckOut = () => {
                         <div className="lg:col-span-1">
                             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 sticky top-6">
                                 <div className="flex items-center gap-3 mb-6">
-                                    <div className="p-2 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg">
+                                    <div className="p-2 bg-gradient-to-br from-red-500 to-red-500 rounded-lg">
                                         <FaCreditCard className="text-white" />
                                     </div>
                                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Order Summary</h2>
@@ -387,7 +396,7 @@ const CheckOut = () => {
                                 <div className="space-y-4 mb-6 max-h-64 overflow-y-auto pr-2">
                                     {carts.map((item, index) => (
                                         <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/50">
-                                            <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-pink-100 dark:from-red-900/30 dark:to-pink-900/30 rounded-lg flex items-center justify-center">
+                                            <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-red-100 dark:from-red-900/30 dark:to-red-900/30 rounded-lg flex items-center justify-center">
                                                 <span className="text-lg font-bold text-red-600 dark:text-red-400">${item.price}</span>
                                             </div>
                                             <div className="flex-1">
@@ -431,7 +440,7 @@ const CheckOut = () => {
                                             <div className="text-lg font-bold text-gray-900 dark:text-white">Total Amount</div>
                                             <div className="text-sm text-gray-500 dark:text-gray-400">Including all taxes</div>
                                         </div>
-                                        <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+                                        <div className="text-3xl font-bold bg-gradient-to-r from-red-600 to-red-600 bg-clip-text text-transparent">
                                             ${total}
                                         </div>
                                     </div>
@@ -444,7 +453,7 @@ const CheckOut = () => {
                                     disabled={isSubmitting}
                                     className={`w-full mt-6 py-4 px-6 rounded-xl font-bold text-white transition-all ${isSubmitting
                                         ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'}`}
+                                        : 'bg-gradient-to-r from-red-600 to-red-600 hover:from-red-700 hover:to-red-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'}`}
                                 >
                                     {isSubmitting ? (
                                         <div className="flex items-center justify-center gap-3">
