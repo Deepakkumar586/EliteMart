@@ -97,8 +97,8 @@ Notes:
 
 ```bash
 # From the frontend root
-docker build -t deepakkumar246/elitemart-frontend:1.1 .
-docker push deepakkumar246/elitemart-frontend:1.1
+docker build -t <yourdockerusername>/elitemart-frontend:1.1 .
+docker push <yourdockerusername>/elitemart-frontend:1.1
 ```
 
 ### Start services with Docker Compose
