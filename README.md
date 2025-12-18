@@ -36,7 +36,7 @@ npm run dev
 yarn dev
 ```
 
-3. Open the app at http://localhost:4173
+3. Open the app at http://localhost:5173
 
 ## Environment Variables (.env) 🔒
 
@@ -50,7 +50,7 @@ Create a `.env` file in the project root with the following variables:
 - `VITE_FIREBASE_APP_ID`
 - `VITE_RAZORPAY_KEY`
 - `VITE_BACKEND_URL`
-  VITE_BACKEND_URL="http://localhost:5000"
+- `VITE_BACKEND_URL`
 
 ### Backend
 
