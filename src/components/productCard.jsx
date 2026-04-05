@@ -13,7 +13,6 @@ const ProductCard = ({ products, loading }) => {
     const whishlists = useSelector((state) => state.whishlist.whishlists);
 
 
-
     const skeletonCount = 10;
 
     const handleAddToCart = (e, product) => {
@@ -32,10 +31,6 @@ const ProductCard = ({ products, loading }) => {
         dispatch(removeWhishlist(id));
         toast.success("Product removed from whishlist!");
     }
-
-
-
-
 
     const CardLayout = ({ product, isSkeleton }) => {
         const isAdded =
@@ -62,7 +57,7 @@ const ProductCard = ({ products, loading }) => {
                         <Skeleton height={150} className="rounded-lg" />
                     ) : (
                         <img
-                            src={product.image}
+                            src={product.thumbnail}
                             alt={product.title}
                             className="w-full h-[150px] object-contain p-3"
                         />
@@ -86,10 +81,6 @@ const ProductCard = ({ products, loading }) => {
                             </button>
                         ))
                     }
-
-
-
-
 
                     {!isSkeleton && (
                         <span className="absolute bottom-2 left-2 px-2 py-1 bg-red-600 text-white text-xs rounded-full">
@@ -123,18 +114,9 @@ const ProductCard = ({ products, loading }) => {
                     <Skeleton height={16} width="50%" />
                 ) : (
                     <div className="flex items-center gap-1">
-                        {[...Array(5)].map((_, i) => (
-                            <FaStar
-                                key={i}
-                                size={12}
-                                className={`mr-0.5 ${i < Math.floor(product.rating.rate)
-                                    ? "text-yellow-400"
-                                    : "text-gray-300 dark:text-gray-600"
-                                    }`}
-                            />
-                        ))}
-                        <span className="text-xs text-gray-600 dark:text-gray-400">
-                            {product.rating.rate} ({product.rating.count})
+                       
+                        <span className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
+                            {product.rating} <FaStar className="text-yellow-500 " size={12} />
                         </span>
                     </div>
                 )}
@@ -167,21 +149,39 @@ const ProductCard = ({ products, loading }) => {
         );
     };
 
-    return (
-        <div className="flex flex-wrap justify-center gap-6">
+   return (
+    <div className="flex flex-wrap justify-center gap-6">
 
-            {loading &&
-                Array(skeletonCount)
-                    .fill(null)
-                    .map((_, index) => <CardLayout key={index} isSkeleton={true} />)}
+       
+        {loading &&
+            Array(skeletonCount)
+                .fill(null)
+                .map((_, index) => (
+                    <CardLayout key={index} isSkeleton={true} />
+                ))
+        }
+        {!loading && products && products.length > 0 && (
+            products.map((product) => (
+                <CardLayout
+                    key={product.id}
+                    product={product}
+                    isSkeleton={false}
+                />
+            ))
+        )}
 
-
-            {!loading &&
-                products.map((product) => (
-                    <CardLayout key={product.id} product={product} isSkeleton={false} />
-                ))}
-        </div>
-    );
+        {!loading && (!products || products.length === 0) && (
+            <div className="w-full text-center py-10">
+                <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                     No products available right now. Please check back later.
+                </h2>
+                <p className="text-sm text-gray-500 mt-2">
+                    Try searching something else.
+                </p>
+            </div>
+        )}
+    </div>
+);
 };
 
 export default ProductCard;

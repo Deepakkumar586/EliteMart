@@ -113,10 +113,13 @@ const Wishlist = () => {
 
 
                                         <div className="p-3 sm:p-4 lg:p-5">
-                                            <h3 className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white mb-1.5 sm:mb-2 line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+                                            <h3 className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white mb-1 sm:mb-1 line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
                                                 {item.title}
                                             </h3>
 
+                                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 truncate">
+                                                {item.description}
+                                            </p>
 
                                             {item.rating && (
                                                 <div className="flex items-center gap-1 mb-2">

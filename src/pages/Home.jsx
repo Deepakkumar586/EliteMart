@@ -7,24 +7,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProducts } from '../redux/productSlice';
 import ProductCard from '../components/productCard';
 
-
-
 const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const [loading, setLoading] = useState(true);
   const [selectesCategory, setSelectedCategory] = useState('All');
 
-
-
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-
-        const response = await fetch('https://fakestoreapi.com/products');
+        const response = await fetch('https://dummyjson.com/products');
         const data = await response.json();
-        dispatch(setProducts(data));
+        dispatch(setProducts(data.products));
         setLoading(false);
 
       }
@@ -41,10 +35,10 @@ const Home = () => {
 
   const Categories = [
     "All",
-    "electronics",
-    "jewelery",
-    "men's clothing",
-    "women's clothing"
+    "beauty",
+    "fragrances",
+    "furniture",
+    "groceries"
   ];
 
   const filtercategoryData = selectesCategory === 'All' ? products : products.filter((item) => item.category === selectesCategory);
@@ -180,9 +174,6 @@ const Home = () => {
 
         {/* all products */}
         <div className="mt-16 mb-16">
-
-
-
           <div className="flex items-center gap-4 mb-8">
             <div className="p-4 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl shadow-lg">
               <FaStore size={32} className="text-white" />
@@ -195,7 +186,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Flex container for responsive layout */}
+         
 
           <ProductCard products={filtercategoryData} loading={loading} />
 

@@ -1,30 +1,20 @@
 import React, { useState } from "react";
 import { FaCreditCard, FaTag, FaTruck, FaLock, FaUser, FaMapMarkerAlt, FaPhone, FaEnvelope, FaPaypal, FaMoneyBillAlt } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "axios";
+import { clearCart } from "../redux/cartSlice";
 
 
 const CheckOut = () => {
     const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY;
 
-
     const carts = useSelector((state) => state.cart.carts)
     const totalAmount = useSelector((state) => state.cart.totalAmount)
     const totalQuantity = useSelector((state) => state.cart.totalQuantity)
     const navigate = useNavigate();
-
-
-
-
-    const handlePayment = async () => {
-
-
-
-    };
-
-
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -120,6 +110,8 @@ const CheckOut = () => {
                         razorpay_signature,
                     });
 
+                    dispatch(clearCart());
+
                     navigate("/success", {
                         state: {
                             carts,
@@ -131,6 +123,7 @@ const CheckOut = () => {
                         },
                     });
                     toast.success("Order placed successfully!");
+
                     setIsSubmitting(false);
 
                     setFormData({

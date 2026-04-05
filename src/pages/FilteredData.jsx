@@ -52,10 +52,10 @@ const FilteredData = () => {
                                 className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
                             >
                                 <div className="flex flex-col gap-3 bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-md hover:shadow-xl transition-all duration-300 h-full">
-                                    {/* Image with Heart Icon */}
+                                    
                                     <div className="relative mb-4 flex-shrink-0">
                                         <img
-                                            src={product.image}
+                                            src={product.thumbnail}
                                             alt={product.title}
                                             className="w-full h-40 object-contain p-3"
                                         />
@@ -80,7 +80,7 @@ const FilteredData = () => {
                                         </span>
                                     </div>
 
-                                    {/* Product Info */}
+                                    
                                     <div className="flex flex-col flex-grow space-y-2">
                                         <h3 className="text-base font-semibold text-gray-900 dark:text-white line-clamp-2">
                                             {product.title}
@@ -89,20 +89,9 @@ const FilteredData = () => {
                                             {product.description}
                                         </p>
                                         <div className="flex items-center gap-1">
-                                            <div className="flex">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <FaStar
-                                                        key={i}
-                                                        size={12}
-                                                        className={`mr-0.5 ${i < Math.floor(product.rating.rate)
-                                                            ? 'text-yellow-400'
-                                                            : 'text-gray-300 dark:text-gray-600'
-                                                            }`}
-                                                    />
-                                                ))}
-                                            </div>
-                                            <span className="text-xs text-gray-600 dark:text-gray-400">
-                                                {product.rating.rate} ({product.rating.count})
+                                             
+                                            <span className= "flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
+                                                {product.rating} <FaStar className="text-yellow-500 " size={12} />
                                             </span>
                                         </div>
                                         <div className="flex items-center justify-between mt-2">

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FaTrash, FaPlus, FaMinus, FaShoppingCart, FaArrowLeft, FaCreditCard, FaTag, FaTruck } from 'react-icons/fa'
 import { MdClose, MdShoppingBasket } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
-import { removeToCart, updateToCart, removeQuantity } from '../redux/cartSlice'
+import { removeToCart, updateToCart, removeQuantity,clearCart  } from '../redux/cartSlice'
 
 
 const Cart = () => {
@@ -83,11 +83,11 @@ const Cart = () => {
                             {carts.map((item) => (
                                 <div key={item.id} className="p-6 border-b border-gray-200 dark:border-gray-700 last:border-0 group  transition-colors">
                                     <div className="flex flex-col sm:flex-row gap-6">
-                                        {/* Product Image */}
+                                        
                                         <div className="relative">
                                             <img
                                                 src={item.image}
-                                                alt={item.title}
+                                                // alt={item.title}
                                                 className="w-full sm:w-40 h-40 object-contain p-4 bg-gray-100 dark:bg-gray-700 rounded-xl"
                                             />
                                             <button

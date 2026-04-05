@@ -20,7 +20,8 @@ const whishlistSlice = createSlice({
                 title: newItem.title,
                 price: newItem.price,
                 totalPrice: newItem.price,
-                image: newItem.image,
+                description: newItem.description,
+                image: newItem.thumbnail,
             });
         },
 
